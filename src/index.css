@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary-accent: #e84d22;
+  --secondary-accent: #ffae91;
+}
+
+body {
+  @apply bg-white dark:bg-navy-950 text-slate-900 dark:text-slate-100 transition-colors duration-300;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-white/40 dark:bg-navy-950/40 backdrop-blur-xl border border-white/20 dark:border-white/10 shadow-xl;
+  }
+  
+  .glass-header {
+    @apply sticky top-0 z-50 bg-white/60 dark:bg-navy-950/60 backdrop-blur-md border-b border-white/20 dark:border-white/10;
+  }
+
+  .interactive-button {
+    @apply relative overflow-hidden transition-all duration-300 hover:scale-105 active:scale-95;
+  }
+}
+
+.gradient-text {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-400 via-primary-600 to-primary-700 dark:from-primary-300 dark:via-primary-500 dark:to-primary-600 font-extrabold;
+}
+
+.glow-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: radial-gradient(circle at 50% 50%, rgba(232, 77, 34, 0.1), transparent 70%);
+}
