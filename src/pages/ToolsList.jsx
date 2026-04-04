@@ -32,7 +32,7 @@ const ToolsList = () => {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Filter tools by name or purpose..." 
-            className="w-full pl-12 pr-4 py-4 rounded-2xl bg-white dark:bg-navy-900 border border-slate-200 dark:border-white/10 focus:ring-2 focus:ring-primary-500/50 outline-none transition-all shadow-sm group-hover:shadow-md dark:text-white"
+            className="w-full pl-12 pr-4 py-4 rounded-2xl bg-white dark:bg-brand-900 border border-slate-200 dark:border-white/10 focus:ring-2 focus:ring-primary-500/50 outline-none transition-all shadow-sm group-hover:shadow-md dark:text-white"
           />
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 size-5 text-slate-400 group-focus-within:text-primary-500" />
         </div>
@@ -40,7 +40,7 @@ const ToolsList = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-12 items-start">
         {/* Sidebar Sidebar */}
-        <aside className="sticky top-28 bg-slate-50 dark:bg-navy-900/50 p-6 rounded-3xl border border-slate-200 dark:border-white/5 space-y-6">
+        <aside className="sticky top-28 bg-slate-50 dark:bg-brand-900/50 p-6 rounded-3xl border border-slate-200 dark:border-white/5 space-y-6">
           <div className="flex items-center justify-between px-2 mb-4">
             <h3 className="font-black text-slate-800 dark:text-white flex items-center gap-2">
               <SlidersHorizontal size={18} className="text-primary-500" /> Categories

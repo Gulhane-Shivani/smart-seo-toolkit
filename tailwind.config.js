@@ -14,15 +14,15 @@ export default {
           200: '#ffd0be',
           300: '#ffae91',
           400: '#ff7f54',
-          500: '#e84d22', // The core branding color from the image
+          500: '#e84d22', // Vibrant Orange from image
           600: '#d33e1d',
           700: '#b13010',
           800: '#8e260e',
           900: '#73210f',
         },
-        navy: {
-          900: '#0B1120',
-          950: '#020617',
+        brand: {
+          900: '#1a0a05', // Burnt chocolate/orange base
+          950: '#0f0502', // Deep near-black orange
         }
       },
       animation: {

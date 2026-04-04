@@ -70,19 +70,19 @@ const Home = () => {
         {/* Hero Background Elements */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-screen h-screen -z-10 pointer-events-none opacity-50 dark:opacity-80">
           <div className="absolute top-[10%] left-[10%] w-[500px] h-[500px] bg-primary-600/10 blur-[150px] rounded-full"></div>
-          <div className="absolute bottom-[20%] right-[10%] w-[500px] h-[500px] bg-cyan-600/10 blur-[150px] rounded-full"></div>
+          <div className="absolute bottom-[20%] right-[10%] w-[500px] h-[500px] bg-amber-600/10 blur-[150px] rounded-full"></div>
         </div>
       </section>
 
       {/* Popular Tools Section */}
-      <section id="popular-tools" className="py-24 px-4 md:px-8 bg-slate-50/50 dark:bg-navy-950/30">
+      <section id="popular-tools" className="py-24 px-4 md:px-8 bg-slate-50/50 dark:bg-brand-950/30">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row items-end justify-between mb-16 gap-4">
             <div className="max-w-xl text-left">
               <h2 className="text-4xl font-black text-slate-800 dark:text-white mb-4">Popular Tools.</h2>
               <p className="text-lg text-slate-500 dark:text-slate-400 font-medium">Explore the most used tools by SEO professionals to boost their rankings.</p>
             </div>
-            <Link to="/tools" className="px-6 py-3 rounded-xl bg-white dark:bg-navy-900 border border-slate-200 dark:border-white/10 font-bold hover:bg-slate-50 dark:hover:bg-white/5 transition-all text-sm">
+            <Link to="/tools" className="px-6 py-3 rounded-xl bg-white dark:bg-brand-900 border border-slate-200 dark:border-white/10 font-bold hover:bg-slate-50 dark:hover:bg-white/5 transition-all text-sm">
               View All Tools
             </Link>
           </div>
@@ -103,8 +103,8 @@ const Home = () => {
             <h3 className="text-2xl font-black mb-2 dark:text-white">SEO Analysis</h3>
             <p className="text-slate-500 dark:text-slate-400 text-sm">Audit your website architecture and technical performance with deep insights.</p>
           </div>
-          <div className="glass-card p-10 rounded-3xl hover:border-cyan-500/50 transition-all cursor-pointer group">
-            <TrendingUp className="size-12 text-cyan-500 mb-6 group-hover:scale-110 transition-transform" />
+          <div className="glass-card p-10 rounded-3xl hover:border-amber-500/50 transition-all cursor-pointer group">
+            <TrendingUp className="size-12 text-amber-500 mb-6 group-hover:scale-110 transition-transform" />
             <h3 className="text-2xl font-black mb-2 dark:text-white">Keywords</h3>
             <p className="text-slate-500 dark:text-slate-400 text-sm">Find profitable keywords and check density to rank higher in SERP positions.</p>
           </div>

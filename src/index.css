@@ -8,17 +8,19 @@
 }
 
 body {
-  @apply bg-white dark:bg-navy-950 text-slate-900 dark:text-slate-100 transition-colors duration-300;
+  @apply bg-white dark:bg-brand-950 text-slate-900 dark:text-slate-100 transition-colors duration-300;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
 @layer components {
   .glass-card {
-    @apply bg-white/40 dark:bg-navy-950/40 backdrop-blur-xl border border-white/20 dark:border-white/10 shadow-xl;
+    @apply bg-white/40 dark:bg-brand-950 backdrop-blur-xl border border-white/20 dark:border-white/10 shadow-xl;
+    @apply dark:bg-opacity-40;
   }
   
   .glass-header {
-    @apply sticky top-0 z-50 bg-white/60 dark:bg-navy-950/60 backdrop-blur-md border-b border-white/20 dark:border-white/10;
+    @apply sticky top-0 z-50 bg-white/60 dark:bg-brand-950 backdrop-blur-md border-b border-white/20 dark:border-white/10;
+    @apply dark:bg-opacity-60;
   }
 
   .interactive-button {

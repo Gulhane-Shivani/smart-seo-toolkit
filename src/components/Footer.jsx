@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-slate-50 dark:bg-navy-950 border-t border-slate-200 dark:border-white/10 pt-20 pb-10 mt-20 relative overflow-hidden">
+    <footer className="w-full bg-slate-50 dark:bg-brand-950 border-t border-slate-200 dark:border-white/10 pt-20 pb-10 mt-20 relative overflow-hidden">
       {/* Decorative Glows */}
       <div className="absolute top-0 right-1/4 w-96 h-96 bg-primary-600/5 blur-[120px] rounded-full pointer-events-none"></div>
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-cyan-600/5 blur-[120px] rounded-full pointer-events-none"></div>

@@ -39,7 +39,7 @@ function Navbar() {
             <input 
               type="text" 
               placeholder="Search tools..." 
-              className="pl-10 pr-4 py-2 rounded-full bg-slate-100 dark:bg-navy-900 border border-slate-200 dark:border-white/10 focus:outline-none focus:ring-2 focus:ring-primary-500/50 transition-all w-64"
+              className="pl-10 pr-4 py-2 rounded-full bg-slate-100 dark:bg-brand-900 border border-slate-200 dark:border-white/10 focus:outline-none focus:ring-2 focus:ring-primary-500/50 transition-all w-64"
             />
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-slate-400 group-focus-within:text-primary-500 transition-colors" />
           </div>
@@ -76,12 +76,12 @@ function Navbar() {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 w-full bg-white dark:bg-navy-900 border-b border-slate-200 dark:border-white/10 p-4 space-y-4 animate-in fade-in slide-in-from-top-4 duration-300">
+        <div className="md:hidden absolute top-full left-0 w-full bg-white dark:bg-brand-900 border-b border-slate-200 dark:border-white/10 p-4 space-y-4 animate-in fade-in slide-in-from-top-4 duration-300">
            <div className="relative group">
             <input 
               type="text" 
               placeholder="Search tools..." 
-              className="w-full pl-10 pr-4 py-2 rounded-lg bg-slate-100 dark:bg-navy-950 border border-slate-200 dark:border-white/10"
+              className="w-full pl-10 pr-4 py-2 rounded-lg bg-slate-100 dark:bg-brand-950 border border-slate-200 dark:border-white/10"
             />
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-slate-400" />
           </div>
