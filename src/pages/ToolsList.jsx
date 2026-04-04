@@ -1,12 +1,25 @@
-import { useState, useMemo } from 'react';
-import { Search, SlidersHorizontal, ChevronRight } from 'lucide-react';
+import { useState, useMemo, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import { Search, SlidersHorizontal, ChevronRight, ChevronLeft } from 'lucide-react';
 import { TOOLS, CATEGORIES } from '../data/tools';
+import { Link } from 'react-router-dom';
 import ToolCard from '../components/ToolCard';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const ToolsList = () => {
   const [activeCategory, setActiveCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
+  const { search } = useLocation();
+
+  useEffect(() => {
+    const params = new URLSearchParams(search);
+    const cat = params.get('category');
+    if (cat) {
+      setActiveCategory(cat);
+      // Scroll to top when category changes
+      window.scrollTo(0, 0);
+    }
+  }, [search]);
 
   const filteredTools = useMemo(() => {
     return TOOLS.filter(tool => {
@@ -18,7 +31,10 @@ const ToolsList = () => {
   }, [activeCategory, searchQuery]);
 
   return (
-    <div className="pt-24 min-h-screen px-4 md:px-8 max-w-7xl mx-auto">
+    <div className="pt-6 min-h-screen px-4 md:px-8 max-w-7xl mx-auto">
+      <Link to="/" className="inline-flex items-center gap-2 font-bold text-slate-400 hover:text-primary-500 mb-8 transition-colors group">
+        <ChevronLeft size={18} className="group-hover:-translate-x-1 transition-transform" /> Back to Home
+      </Link>
       <div className="flex flex-col md:flex-row items-baseline justify-between mb-12 gap-6">
         <div>
           <h1 className="text-4xl font-black text-slate-800 dark:text-white mb-2">Our Tools Hub.</h1>
@@ -71,19 +87,6 @@ const ToolsList = () => {
               );
             })}
           </nav>
-
-          <div className="mt-8 pt-8 border-t border-slate-200 dark:border-white/5">
-             <div className="p-6 bg-gradient-to-br from-primary-600 to-indigo-600 rounded-2xl text-white relative overflow-hidden shadow-xl shadow-primary-600/20">
-                <h4 className="font-black mb-2 relative z-10">Pro Upgrade</h4>
-                <p className="text-white/80 text-xs mb-4 font-medium relative z-10 leading-relaxed">
-                  Unlock premium features, unlimited searches and deeper analysis.
-                </p>
-                <button className="w-full bg-white text-primary-700 py-2.5 rounded-xl font-black text-sm relative z-10 hover:bg-slate-100 transition-colors shadow-sm">
-                  Go Pro - $12/mo
-                </button>
-                <div className="absolute top-0 right-0 size-20 bg-white/10 blur-2xl rounded-full -mr-8 -mt-8"></div>
-             </div>
-          </div>
         </aside>
 
         {/* Tools Content Grid */}

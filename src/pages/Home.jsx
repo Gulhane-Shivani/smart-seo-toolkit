@@ -17,15 +17,13 @@ const Home = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <span className="px-5 py-2 rounded-full bg-primary-500/10 text-primary-600 dark:text-primary-400 font-bold text-sm border border-primary-500/20 mb-8 inline-block shadow-lg shadow-primary-500/5">
-              🚀 15+ Advanced Tools Ready for SEO Success
-            </span>
-            <h1 className="text-5xl md:text-8xl font-black text-slate-800 dark:text-white leading-[1.1] mb-8 tracking-tight">
+            
+            <h1 className="text-5xl md:text-4xl font-black text-slate-800 dark:text-white leading-[1.1] mb-8 tracking-tight">
               Optimize for <span className="gradient-text">Humans</span>,<br /> 
               Rank for <span className="text-primary-600 dark:text-primary-400">Search Engines.</span>
             </h1>
             <p className="max-w-3xl mx-auto text-xl text-slate-500 dark:text-slate-400 leading-relaxed mb-12 font-medium">
-              Join thousands of marketers using NexusSEO's premium tools toolkit to audit, check, and generate SEO-optimized content in seconds. 
+              Join thousands of marketers using Smart SEO Toolkit's  to audit, check, and generate SEO-optimized content in seconds. 
             </p>
           </motion.div>
 
@@ -33,18 +31,18 @@ const Home = () => {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.2, duration: 0.5 }}
-            className="flex flex-col md:flex-row items-center justify-center gap-6 max-w-2xl mx-auto"
+            className="flex flex-col md:flex-row items-center justify-center gap-4 max-w-2xl mx-auto"
           >
             <div className="relative w-full md:w-auto">
               <input 
                 type="text" 
                 placeholder="Paste URL or search tool..." 
-                className="w-full md:w-[450px] pl-14 pr-6 py-5 rounded-2xl bg-white dark:bg-navy-900 border-2 border-slate-200 dark:border-white/10 text-lg shadow-2xl focus:border-primary-500 outline-none transition-all placeholder:text-slate-400 text-slate-800 dark:text-white"
+                className="w-full md:w-[400px] pl-12 pr-6 py-4 rounded-xl bg-white dark:bg-navy-900 border-2 border-slate-200 dark:border-white/10 text-base shadow-2xl focus:border-primary-500 outline-none transition-all placeholder:text-slate-400 text-slate-800 dark:text-white"
               />
-              <Search className="absolute left-5 top-1/2 -translate-y-1/2 size-6 text-slate-400" />
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 size-5 text-slate-400" />
             </div>
-            <button className="w-full md:w-auto px-10 py-5 bg-primary-600 text-white rounded-2xl font-black text-lg hover:bg-primary-500 shadow-xl shadow-primary-600/30 transition-all scale-100 active:scale-95 flex items-center justify-center gap-2">
-              Get Started <ChevronRight size={24} />
+            <button className="w-full md:w-auto px-8 py-4 bg-primary-600 text-white rounded-xl font-black text-base hover:bg-primary-500 shadow-xl shadow-primary-600/30 transition-all scale-100 active:scale-95 flex items-center justify-center gap-2">
+              Get Started <ChevronRight size={20} />
             </button>
           </motion.div>
 

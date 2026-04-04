@@ -14,7 +14,7 @@ export default function Footer() {
             <div className="p-2 bg-primary-600 rounded-lg">
               <Zap className="text-white size-5 fill-white" />
             </div>
-            <span className="text-2xl font-black dark:text-white">NexusSEO</span>
+            <span className="text-2xl font-black dark:text-white">Smart SEO Toolkit</span>
           </Link>
           <p className="text-slate-500 dark:text-slate-400 leading-relaxed mb-6">
             The all-in-one SEO workspace for content creators and marketers. Drive more traffic, faster.
@@ -39,10 +39,10 @@ export default function Footer() {
         <div>
            <h4 className="font-extrabold text-slate-800 dark:text-white mb-6 uppercase tracking-wider text-sm">Categories</h4>
           <ul className="space-y-4 text-slate-500 dark:text-slate-400">
-            <li><a href="#" className="hover:text-primary-500 transition-colors">SEO Analysis</a></li>
-            <li><a href="#" className="hover:text-primary-500 transition-colors">Generators</a></li>
-            <li><a href="#" className="hover:text-primary-500 transition-colors">Keyword Tools</a></li>
-            <li><a href="#" className="hover:text-primary-500 transition-colors">Checkers</a></li>
+            <li><Link to="/tools?category=analysis" className="hover:text-primary-500 transition-colors">SEO Analysis</Link></li>
+            <li><Link to="/tools?category=content" className="hover:text-primary-500 transition-colors">Generators</Link></li>
+            <li><Link to="/tools?category=keywords" className="hover:text-primary-500 transition-colors">Keyword Tools</Link></li>
+            <li><Link to="/tools?category=checkers" className="hover:text-primary-500 transition-colors">Checkers</Link></li>
           </ul>
         </div>
 
@@ -63,7 +63,7 @@ export default function Footer() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 md:px-8 mt-20 pt-8 border-t border-slate-200 dark:border-white/5 text-center text-slate-500 dark:text-slate-400 text-sm font-medium">
-        <p>&copy; {new Date().getFullYear()} NexusSEO Hub. All rights reserved.</p>
+        <p>&copy; {new Date().getFullYear()} Smart SEO Toolkit Hub. All rights reserved.</p>
       </div>
     </footer>
   );

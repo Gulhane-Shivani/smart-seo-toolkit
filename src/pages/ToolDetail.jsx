@@ -1,8 +1,8 @@
-import { useState, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { TOOLS } from '../data/tools';
-import { ChevronLeft, Share2, Star, Clock, Info, AlertTriangle, CheckCircle2 } from 'lucide-react';
+import { ChevronLeft, Share2, Star, Clock, Info, AlertTriangle, CheckCircle2, X } from 'lucide-react';
 import ResultPanel from '../components/ResultPanel';
 
 // --- TOOL LOGIC COMPONENTS ---
@@ -284,10 +284,161 @@ const SEOAudit = () => {
     );
 };
 
+const GoogleSerpPreview = () => {
+    const [meta, setMeta] = useState({ title: '', desc: '', url: 'https://example.com' });
+
+    return (
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_450px] gap-8">
+            <div className="glass-card p-8 rounded-3xl space-y-6">
+                <div>
+                    <label className="block text-sm font-black text-slate-500 mb-2 uppercase tracking-wider">Page Title</label>
+                    <input 
+                        type="text" 
+                        value={meta.title}
+                        onChange={e => setMeta({...meta, title: e.target.value})}
+                        placeholder="Smart SEO Toolkit | All-in-one SEO Workspace"
+                        className="w-full p-4 bg-slate-100 dark:bg-navy-950/50 rounded-xl border border-transparent focus:border-primary-500 outline-none dark:text-white"
+                    />
+                </div>
+                <div>
+                     <label className="block text-sm font-black text-slate-500 mb-2 uppercase tracking-wider">Meta Description</label>
+                    <textarea 
+                        value={meta.desc}
+                        onChange={e => setMeta({...meta, desc: e.target.value})}
+                        placeholder="Experience the future of SEO with our premium tools..."
+                        className="w-full h-32 p-4 bg-slate-100 dark:bg-navy-950/50 rounded-xl border border-transparent focus:border-primary-500 outline-none dark:text-white"
+                    />
+                </div>
+                <div>
+                    <label className="block text-sm font-black text-slate-500 mb-2 uppercase tracking-wider">Site URL</label>
+                    <input 
+                        type="text" 
+                        value={meta.url}
+                        onChange={e => setMeta({...meta, url: e.target.value})}
+                        className="w-full p-4 bg-slate-100 dark:bg-navy-950/50 rounded-xl border border-transparent focus:border-primary-500 outline-none dark:text-white"
+                    />
+                </div>
+            </div>
+
+            <ResultPanel title="Google Search Preview">
+                <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm max-w-full overflow-hidden">
+                    <div className="flex items-center gap-2 mb-1">
+                        <div className="size-7 bg-slate-100 rounded-full flex items-center justify-center text-[10px] text-slate-400 font-bold">G</div>
+                        <div className="flex flex-col">
+                            <span className="text-[14px] text-slate-900 leading-none">Google</span>
+                            <span className="text-[12px] text-slate-500 truncate max-w-[200px]">{meta.url || 'https://example.com'}</span>
+                        </div>
+                    </div>
+                    <h3 className="text-[20px] text-[#1a0dab] hover:underline cursor-pointer mb-1 truncate leading-tight mt-1">
+                        {meta.title || 'Please enter a page title'}
+                    </h3>
+                    <p className="text-[14px] text-[#4d5156] leading-relaxed break-words line-clamp-2">
+                        {meta.desc || 'Enter a meta description to see how your snippet will look in search results. Google typically shows up to 160 characters.'}
+                    </p>
+                </div>
+                
+                <div className="mt-8 space-y-4">
+                    <div className="p-4 bg-slate-50 dark:bg-white/5 rounded-xl border border-slate-200 dark:border-white/10">
+                        <div className="flex justify-between items-center mb-2">
+                            <p className="text-xs font-black text-slate-400 uppercase">Title Length</p>
+                            <span className={`text-xs font-black ${meta.title.length > 60 ? 'text-rose-500' : 'text-emerald-500'}`}>
+                                {meta.title.length}/60
+                            </span>
+                        </div>
+                        <div className="w-full h-1.5 bg-slate-200 dark:bg-white/10 rounded-full overflow-hidden">
+                            <motion.div 
+                                initial={{ width: 0 }}
+                                animate={{ width: `${Math.min((meta.title.length / 60) * 100, 100)}%` }}
+                                className={`h-full transition-colors duration-300 ${meta.title.length > 60 ? 'bg-rose-500' : 'bg-emerald-500'}`}
+                            ></motion.div>
+                        </div>
+                    </div>
+                    <div className="p-4 bg-slate-50 dark:bg-white/5 rounded-xl border border-slate-200 dark:border-white/10">
+                        <div className="flex justify-between items-center mb-2">
+                            <p className="text-xs font-black text-slate-400 uppercase">Description Length</p>
+                            <span className={`text-xs font-black ${meta.desc.length > 160 ? 'text-rose-500' : 'text-emerald-500'}`}>
+                                {meta.desc.length}/160
+                            </span>
+                        </div>
+                        <div className="w-full h-1.5 bg-slate-200 dark:bg-white/10 rounded-full overflow-hidden">
+                            <motion.div 
+                                initial={{ width: 0 }}
+                                animate={{ width: `${Math.min((meta.desc.length / 160) * 100, 100)}%` }}
+                                className={`h-full transition-colors duration-300 ${meta.desc.length > 160 ? 'bg-rose-500' : 'bg-emerald-500'}`}
+                            ></motion.div>
+                        </div>
+                    </div>
+                </div>
+            </ResultPanel>
+        </div>
+    );
+};
+
+const ToolGuide = ({ tool, onClose }) => {
+    const Icon = tool.icon;
+    return (
+        <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-brand-950/80 backdrop-blur-md"
+        >
+            <motion.div 
+                initial={{ scale: 0.9, y: 20 }}
+                animate={{ scale: 1, y: 0 }}
+                className="bg-white dark:bg-brand-900 w-full max-w-2xl rounded-3xl shadow-2xl p-10 relative border border-slate-200 dark:border-white/10"
+            >
+                <button 
+                    onClick={onClose}
+                    className="absolute top-6 right-6 p-2 rounded-full hover:bg-slate-100 dark:hover:bg-white/5 transition-colors"
+                >
+                    <X size={24} className="text-slate-400" />
+                </button>
+                <div className="flex items-center gap-4 mb-8">
+                    <div className="p-3 bg-primary-600/10 rounded-2xl">
+                        <Icon size={32} className="text-primary-600" />
+                    </div>
+                    <div>
+                        <h2 className="text-3xl font-black dark:text-white">{tool.name} Guide</h2>
+                        <p className="text-slate-400 font-bold uppercase tracking-widest text-xs">Complete walk-through of the {tool.category} toolkit</p>
+                    </div>
+                </div>
+
+                <div className="space-y-6 text-slate-600 dark:text-slate-300">
+                    <div className="flex gap-4">
+                        <div className="size-8 rounded-full bg-primary-600 text-white flex-shrink-0 flex items-center justify-center font-black">1</div>
+                        <p className="font-medium leading-relaxed">Enter your target data (URL, Title, or Content) in the main input field above.</p>
+                    </div>
+                    <div className="flex gap-4">
+                        <div className="size-8 rounded-full bg-primary-600 text-white flex-shrink-0 flex items-center justify-center font-black">2</div>
+                        <p className="font-medium leading-relaxed">Customize any available settings or parameters to match your specific SEO goals.</p>
+                    </div>
+                    <div className="flex gap-4">
+                        <div className="size-8 rounded-full bg-primary-600 text-white flex-shrink-0 flex items-center justify-center font-black">3</div>
+                        <p className="font-medium leading-relaxed">Click 'Generate' or 'Analyze' to process your data through our premium algorithms.</p>
+                    </div>
+                    <div className="flex gap-4">
+                        <div className="size-8 rounded-full bg-primary-600 text-white flex-shrink-0 flex items-center justify-center font-black">4</div>
+                        <p className="font-medium leading-relaxed">Review the generated reports and use the 'Copy' or 'Save' features to implement the results.</p>
+                    </div>
+                </div>
+
+                <button 
+                    onClick={onClose}
+                    className="w-full mt-10 py-4 bg-primary-600 text-white rounded-2xl font-black text-lg hover:bg-primary-500 shadow-xl shadow-primary-600/30 transition-all font-black"
+                >
+                    Got it, let's go!
+                </button>
+            </motion.div>
+        </motion.div>
+    );
+};
+
 // --- MAIN WRAPPER ---
 
 const ToolDetail = () => {
   const { slug } = useParams();
+  const [showGuide, setShowGuide] = useState(false);
   const tool = TOOLS.find(t => t.slug === slug);
 
   if (!tool) return <div>Tool not found</div>;
@@ -298,14 +449,15 @@ const ToolDetail = () => {
       case 'meta-tag-generator': return <MetaTagGenerator />;
       case 'word-counter': return <WordCounter />;
       case 'basic-seo-audit': return <SEOAudit />;
+      case 'google-serp-preview': return <GoogleSerpPreview />;
       default: return <div className="text-center py-20 font-bold opacity-50">This tool is currently in maintenance. Check back soon!</div>;
     }
   };
 
   return (
-    <div className="pt-24 min-h-screen max-w-7xl mx-auto px-4 md:px-8 pb-20">
-      <Link to="/tools" className="inline-flex items-center gap-2 font-bold text-slate-400 hover:text-primary-500 mb-12 transition-colors group">
-        <ChevronLeft className="group-hover:-translate-x-1 transition-transform" /> Back to Workspace
+    <div className="pt-6 min-h-screen max-w-7xl mx-auto px-4 md:px-8 pb-20">
+      <Link to="/tools" className="inline-flex items-center gap-2 font-bold text-slate-400 hover:text-primary-500 mb-8 transition-colors group">
+        <ChevronLeft size={18} className="group-hover:-translate-x-1 transition-transform" /> Back to Workspace
       </Link>
 
       <motion.div 
@@ -329,11 +481,18 @@ const ToolDetail = () => {
             <button className="p-4 rounded-2xl bg-white dark:bg-navy-900 border border-slate-200 dark:border-white/10 hover:bg-slate-50 dark:hover:bg-white/5 transition-all shadow-sm">
                 <Share2 size={24} className="text-slate-500" />
             </button>
-             <button className="p-4 rounded-2xl bg-primary-600 text-white shadow-xl shadow-primary-600/30 hover:bg-primary-500 transition-all font-black px-8">
+             <button 
+                onClick={() => setShowGuide(true)}
+                className="p-4 rounded-2xl bg-primary-600 text-white shadow-xl shadow-primary-600/30 hover:bg-primary-500 transition-all font-black px-8"
+              >
                 Guide Tool
             </button>
         </div>
       </motion.div>
+
+      <AnimatePresence>
+        {showGuide && <ToolGuide tool={tool} onClose={() => setShowGuide(false)} />}
+      </AnimatePresence>
 
       <div className="relative">
         {renderTool()}

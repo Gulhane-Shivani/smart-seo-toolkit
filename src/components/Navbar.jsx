@@ -29,7 +29,7 @@ function Navbar() {
             <Zap className="text-white size-6" />
           </div>
           <span className="text-2xl font-black bg-clip-text text-transparent bg-gradient-to-r from-primary-600 to-primary-400 dark:from-white dark:to-primary-300">
-            NexusSEO
+            Smart SEO Toolkit
           </span>
         </Link>
 
