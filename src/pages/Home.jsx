@@ -1,11 +1,31 @@
+import { useState } from 'react';
 import { ChevronRight, Search, BarChart3, ShieldCheck, Sparkles, TrendingUp } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { TOOLS } from '../data/tools';
 import ToolCard from '../components/ToolCard';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Home = () => {
+  const [inputValue, setInputValue] = useState('');
+  const navigate = useNavigate();
   const popularTools = TOOLS.filter(tool => tool.popular);
+
+  const handleGetStarted = (e) => {
+    e.preventDefault();
+    if (!inputValue.trim()) return;
+
+    // Basic URL pattern detection
+    const urlPattern = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/;
+    
+    if (urlPattern.test(inputValue)) {
+      // If it looks like a URL, go to SEO Audit with that URL passed as param
+      const formattedUrl = inputValue.startsWith('http') ? inputValue : `https://${inputValue}`;
+      navigate(`/tools/basic-seo-audit?url=${encodeURIComponent(formattedUrl)}`);
+    } else {
+      // Otherwise, treat it as a search query for tools list
+      navigate(`/tools?search=${encodeURIComponent(inputValue)}`);
+    }
+  };
 
   return (
     <div className="min-h-screen relative overflow-hidden">
@@ -27,7 +47,8 @@ const Home = () => {
             </p>
           </motion.div>
 
-          <motion.div 
+          <motion.form 
+            onSubmit={handleGetStarted}
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.2, duration: 0.5 }}
@@ -36,15 +57,20 @@ const Home = () => {
             <div className="relative w-full md:w-auto">
               <input 
                 type="text" 
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
                 placeholder="Paste URL or search tool..." 
                 className="w-full md:w-[400px] pl-12 pr-6 py-4 rounded-xl bg-white dark:bg-navy-900 border-2 border-slate-200 dark:border-white/10 text-base shadow-2xl focus:border-primary-500 outline-none transition-all placeholder:text-slate-400 text-slate-800 dark:text-white"
               />
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 size-5 text-slate-400" />
             </div>
-            <button className="w-full md:w-auto px-8 py-4 bg-primary-600 text-white rounded-xl font-black text-base hover:bg-primary-500 shadow-xl shadow-primary-600/30 transition-all scale-100 active:scale-95 flex items-center justify-center gap-2">
+            <button 
+              type="submit"
+              className="w-full md:w-auto px-8 py-4 bg-primary-600 text-white rounded-xl font-black text-base hover:bg-primary-500 shadow-xl shadow-primary-600/30 transition-all scale-100 active:scale-95 flex items-center justify-center gap-2"
+            >
               Get Started <ChevronRight size={20} />
             </button>
-          </motion.div>
+          </motion.form>
 
           {/* Stats/Badges */}
           <motion.div 

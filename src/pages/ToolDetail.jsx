@@ -1,5 +1,5 @@
-import React, { useState, useMemo } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import React, { useState, useMemo, useEffect } from 'react';
+import { useParams, Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { TOOLS } from '../data/tools';
 import { ChevronLeft, Share2, Star, Clock, Info, AlertTriangle, CheckCircle2, X } from 'lucide-react';
@@ -210,6 +210,8 @@ const SEOAudit = () => {
     const [results, setResults] = useState(null);
     const [loading, setLoading] = useState(false);
 
+    const { search } = useLocation();
+
     const audit = () => {
         setLoading(true);
         setTimeout(() => {
@@ -225,6 +227,16 @@ const SEOAudit = () => {
             setLoading(false);
         }, 1500);
     };
+
+    useEffect(() => {
+        const params = new URLSearchParams(search);
+        const urlParam = params.get('url');
+        if (urlParam) {
+            setUrl(urlParam);
+            // Auto run scan if URL is provided
+            audit(); 
+        }
+    }, [search]);
 
     return (
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_450px] gap-8">

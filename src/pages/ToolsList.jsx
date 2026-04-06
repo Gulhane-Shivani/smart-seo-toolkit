@@ -14,9 +14,14 @@ const ToolsList = () => {
   useEffect(() => {
     const params = new URLSearchParams(search);
     const cat = params.get('category');
+    const q = params.get('search');
+    
     if (cat) {
       setActiveCategory(cat);
-      // Scroll to top when category changes
+      window.scrollTo(0, 0);
+    }
+    if (q) {
+      setSearchQuery(q);
       window.scrollTo(0, 0);
     }
   }, [search]);
