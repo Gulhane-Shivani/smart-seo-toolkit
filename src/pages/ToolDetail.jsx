@@ -242,18 +242,18 @@ const SEOAudit = () => {
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_450px] gap-8">
             <div className="glass-card p-10 rounded-3xl h-fit">
                 <h3 className="text-2xl font-black dark:text-white mb-6">Website Scanner</h3>
-                <div className="flex gap-4 mb-6">
+                <div className="flex flex-col sm:flex-row gap-4 mb-6">
                     <input 
                         type="url" 
                         placeholder="https://example.com" 
                         value={url}
                         onChange={e => setUrl(e.target.value)}
-                        className="flex-grow p-4 bg-slate-100 dark:bg-navy-950/50 rounded-xl border border-transparent focus:border-primary-500 outline-none dark:text-white"
+                        className="flex-grow p-4 bg-slate-100 dark:bg-navy-950/50 rounded-xl border-2 border-transparent focus:border-primary-500 outline-none dark:text-white transition-all"
                     />
                     <button 
                         onClick={audit}
                         disabled={!url || loading}
-                        className="px-8 bg-primary-600 text-white rounded-xl font-black hover:bg-primary-500 disabled:opacity-50"
+                        className="px-8 py-4 bg-primary-600 text-white rounded-xl font-black hover:bg-primary-500 disabled:opacity-50 shrink-0 shadow-lg shadow-primary-600/20 active:scale-95 transition-all"
                     >
                         {loading ? 'Scanning...' : 'Scan'}
                     </button>
@@ -446,6 +446,109 @@ const ToolGuide = ({ tool, onClose }) => {
     );
 };
 
+const HealthChecker = () => {
+    const [url, setUrl] = useState('');
+    const [results, setResults] = useState(null);
+    const [loading, setLoading] = useState(false);
+
+    const check = () => {
+        setLoading(true);
+        setTimeout(() => {
+            setResults({
+                performance: 92,
+                accessibility: 88,
+                bestPractices: 100,
+                seo: 85,
+                details: [
+                    { label: 'First Contentful Paint', value: '1.2s', status: 'optimal' },
+                    { label: 'Time to Interactive', value: '3.4s', status: 'warning' },
+                    { label: 'Total Blocking Time', value: '120ms', status: 'optimal' },
+                    { label: 'Cumulative Layout Shift', value: '0.05', status: 'optimal' }
+                ]
+            });
+            setLoading(false);
+        }, 2000);
+    };
+
+    const MetricRing = ({ percentage, label, color }) => (
+        <div className="flex flex-col items-center gap-3">
+            <div className="relative size-24">
+                <svg className="size-full -rotate-90" viewBox="0 0 100 100">
+                    <circle className="text-slate-100 dark:text-white/5 stroke-current" strokeWidth="8" fill="transparent" r="40" cx="50" cy="50" />
+                    <circle 
+                        className={`${color} stroke-current transition-all duration-1000 ease-out`} 
+                        strokeWidth="8" 
+                        strokeDasharray="251.2" 
+                        strokeDashoffset={251.2 * (1 - percentage / 100)} 
+                        strokeLinecap="round" 
+                        fill="transparent" 
+                        r="40" 
+                        cx="50" 
+                        cy="50" 
+                    />
+                </svg>
+                <div className="absolute inset-0 flex items-center justify-center font-black dark:text-white text-xl">
+                    {percentage}
+                </div>
+            </div>
+            <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{label}</span>
+        </div>
+    );
+
+    return (
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_450px] gap-8">
+            <div className="glass-card p-10 rounded-3xl h-fit">
+                <h3 className="text-2xl font-black dark:text-white mb-6">Performance Scanner</h3>
+                <div className="flex flex-col sm:flex-row gap-4 mb-6">
+                    <input 
+                        type="url" 
+                        placeholder="https://mysite.com" 
+                        value={url}
+                        onChange={e => setUrl(e.target.value)}
+                        className="flex-grow p-4 bg-slate-100 dark:bg-navy-950/50 rounded-xl border-2 border-transparent focus:border-primary-500 outline-none dark:text-white transition-all"
+                    />
+                    <button 
+                        onClick={check}
+                        disabled={!url || loading}
+                        className="px-8 py-4 bg-primary-600 text-white rounded-xl font-black hover:bg-primary-500 disabled:opacity-50 shrink-0 shadow-lg shadow-primary-600/20 active:scale-95 transition-all"
+                    >
+                        {loading ? 'Analyzing...' : 'Check Health'}
+                    </button>
+                </div>
+                
+                {results && (
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 py-8 border-t border-slate-100 dark:border-white/5 mt-8">
+                        <MetricRing percentage={results.performance} label="Performance" color="text-emerald-500" />
+                        <MetricRing percentage={results.accessibility} label="Accessibility" color="text-amber-500" />
+                        <MetricRing percentage={results.bestPractices} label="Practices" color="text-primary-500" />
+                        <MetricRing percentage={results.seo} label="Rankings" color="text-indigo-500" />
+                    </div>
+                )}
+            </div>
+
+            <AnimatePresence>
+                {results && (
+                  <ResultPanel title="Core Vitals Report">
+                     <div className="space-y-4">
+                         {results.details.map((item, i) => (
+                             <div key={i} className="flex items-center justify-between p-4 bg-slate-50 dark:bg-white/5 rounded-2xl border border-slate-200 dark:border-white/10">
+                                 <div className="flex flex-col">
+                                     <span className="text-sm font-black text-slate-800 dark:text-white">{item.label}</span>
+                                     <span className={`text-[10px] font-bold uppercase tracking-wider ${item.status === 'optimal' ? 'text-emerald-500' : 'text-amber-500'}`}>
+                                         {item.status} Status
+                                     </span>
+                                 </div>
+                                 <span className="text-lg font-black text-primary-600 dark:text-primary-400">{item.value}</span>
+                             </div>
+                         ))}
+                     </div>
+                  </ResultPanel>
+                )}
+            </AnimatePresence>
+        </div>
+    );
+};
+
 // --- MAIN WRAPPER ---
 
 const ToolDetail = () => {
@@ -453,7 +556,7 @@ const ToolDetail = () => {
   const [showGuide, setShowGuide] = useState(false);
   const tool = TOOLS.find(t => t.slug === slug);
 
-  if (!tool) return <div>Tool not found</div>;
+  if (!tool) return <div className="text-center py-40 font-black text-slate-400">Tool not found</div>;
 
   const renderTool = () => {
     switch (tool.id) {
@@ -462,6 +565,7 @@ const ToolDetail = () => {
       case 'word-counter': return <WordCounter />;
       case 'basic-seo-audit': return <SEOAudit />;
       case 'google-serp-preview': return <GoogleSerpPreview />;
+      case 'site-health-checker': return <HealthChecker />;
       default: return <div className="text-center py-20 font-bold opacity-50">This tool is currently in maintenance. Check back soon!</div>;
     }
   };

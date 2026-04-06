@@ -41,3 +41,11 @@ body {
   z-index: -1;
   background: radial-gradient(circle at 50% 50%, rgba(232, 77, 34, 0.1), transparent 70%);
 }
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

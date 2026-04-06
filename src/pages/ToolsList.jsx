@@ -60,16 +60,16 @@ const ToolsList = () => {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-12 items-start">
-        {/* Sidebar Sidebar */}
-        <aside className="sticky top-28 bg-slate-50 dark:bg-brand-900/50 p-6 rounded-3xl border border-slate-200 dark:border-white/5 space-y-6">
-          <div className="flex items-center justify-between px-2 mb-4">
+        {/* Category Selection */}
+        <aside className="lg:sticky lg:top-28 bg-slate-50 dark:bg-brand-900/50 p-4 md:p-6 rounded-3xl border border-slate-200 dark:border-white/5 lg:space-y-6">
+          <div className="hidden lg:flex items-center justify-between px-2 mb-4">
             <h3 className="font-black text-slate-800 dark:text-white flex items-center gap-2">
               <SlidersHorizontal size={18} className="text-primary-500" /> Categories
             </h3>
             <span className="text-xs font-bold text-slate-400">{CATEGORIES.length} Total</span>
           </div>
 
-          <nav className="space-y-1">
+          <nav className="flex lg:flex-col gap-2 overflow-x-auto lg:overflow-visible pb-4 lg:pb-0 scrollbar-hide">
             {CATEGORIES.map((cat) => {
               const Icon = cat.icon;
               const isActive = activeCategory === cat.id;
@@ -77,17 +77,17 @@ const ToolsList = () => {
                 <button
                   key={cat.id}
                   onClick={() => setActiveCategory(cat.id)}
-                  className={`w-full flex items-center justify-between px-4 py-3 rounded-xl transition-all duration-300 font-bold group ${
+                  className={`flex-shrink-0 flex items-center justify-between px-5 py-3 lg:px-4 lg:py-3 rounded-xl transition-all duration-300 font-bold group whitespace-nowrap ${
                     isActive 
                       ? 'bg-primary-600 text-white shadow-lg shadow-primary-600/20' 
-                      : 'hover:bg-slate-200 dark:hover:bg-white/5 text-slate-500 dark:text-slate-400'
+                      : 'bg-white lg:bg-transparent dark:bg-brand-900 lg:dark:bg-transparent hover:bg-slate-200 dark:hover:bg-white/5 text-slate-500 dark:text-slate-400 border border-slate-100 lg:border-transparent dark:border-white/5'
                   }`}
                 >
                   <div className="flex items-center gap-3">
                     <Icon size={18} className={isActive ? 'text-white' : 'text-slate-400 group-hover:text-primary-500'} />
                     {cat.name}
                   </div>
-                  {isActive && <motion.div layoutId="arrow"><ChevronRight size={14} /></motion.div>}
+                  {isActive && <div className="hidden lg:block ml-2"><ChevronRight size={14} /></div>}
                 </button>
               );
             })}
