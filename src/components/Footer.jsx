@@ -47,6 +47,16 @@ export default function Footer() {
         </div>
 
         <div>
+           <h4 className="font-extrabold text-slate-800 dark:text-white mb-6 uppercase tracking-wider text-sm">Support & FAQ</h4>
+          <ul className="space-y-4 text-slate-500 dark:text-slate-400">
+            <li><Link to="/#audit-info" className="hover:text-primary-500 transition-colors">Smart-Audit Info</Link></li>
+            <li><Link to="/#ai-opt" className="hover:text-primary-500 transition-colors">AI Optimization</Link></li>
+            <li><Link to="/#agency-rep" className="hover:text-primary-500 transition-colors">Agency Reporting</Link></li>
+            <li><Link to="/#perf-metrics" className="hover:text-primary-500 transition-colors">Performance Metrics</Link></li>
+          </ul>
+        </div>
+
+        <div>
           <h4 className="font-extrabold text-slate-800 dark:text-white mb-6 uppercase tracking-wider text-sm">Newsletter</h4>
           <p className="text-slate-500 dark:text-slate-400 mb-6 font-medium">Get SEO tips and updates delivered to your inbox.</p>
           <div className="flex items-center gap-2 p-1 rounded-xl bg-slate-200 dark:bg-white/5 border border-slate-300 dark:border-white/10 group focus-within:ring-2 focus-within:ring-primary-500/50 transition-all">
