@@ -37,22 +37,22 @@ const KeywordDensity = () => {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-8">
       <div className="space-y-6">
-        <div className="glass-card p-8 rounded-3xl">
-          <label className="text-xl font-black text-slate-800 dark:text-white mb-6 flex items-center gap-3">
-            <Info size={20} className="text-primary-500" /> Content Analysis
+        <div className="glass-card p-6 rounded-2xl">
+          <label className="text-lg font-black text-slate-800 dark:text-white mb-4 flex items-center gap-3">
+            <Info size={18} className="text-primary-500" /> Content Analysis
           </label>
           <textarea
             value={text}
             onChange={(e) => setText(e.target.value)}
             placeholder="Paste your content here to analyze keyword density..."
-            className="w-full h-80 bg-slate-100 dark:bg-navy-950/50 rounded-2xl p-6 border-2 border-transparent focus:border-primary-500 outline-none transition-all placeholder:text-slate-400 text-lg leading-relaxed dark:text-white"
+            className="w-full h-56 bg-slate-100 dark:bg-navy-950/50 rounded-xl p-4 border-2 border-transparent focus:border-primary-500 outline-none transition-all placeholder:text-slate-400 text-base leading-relaxed dark:text-white"
           />
           <button 
             onClick={analyze}
             disabled={!text || loading}
-            className="w-full mt-6 py-5 bg-primary-600 text-white rounded-2xl font-black text-xl hover:bg-primary-500 disabled:opacity-50 transition-all flex items-center justify-center gap-2"
+            className="w-full mt-4 py-3 bg-primary-600 text-white rounded-xl font-black text-lg hover:bg-primary-500 disabled:opacity-50 transition-all flex items-center justify-center gap-2"
           >
-            {loading ? <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-white"></div> : 'Analyze Keywords'}
+            {loading ? <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div> : 'Analyze Keywords'}
           </button>
         </div>
       </div>
@@ -100,49 +100,49 @@ const MetaTagGenerator = () => {
 
     return (
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_450px] gap-8">
-            <div className="glass-card p-8 rounded-3xl space-y-6">
+            <div className="glass-card p-6 rounded-2xl space-y-4">
                 <div>
-                    <label className="block text-sm font-black text-slate-500 mb-2 uppercase tracking-wider">Page Title</label>
+                    <label className="block text-[10px] font-black text-slate-500 mb-1 uppercase tracking-wider">Page Title</label>
                     <input 
                         type="text" 
                         value={meta.title}
                         onChange={e => setMeta({...meta, title: e.target.value})}
                         placeholder="e.g. My Awesome SEO Tools"
-                        className="w-full p-4 bg-slate-100 dark:bg-navy-950/50 rounded-xl border border-transparent focus:border-primary-500 outline-none dark:text-white"
+                        className="w-full p-3 bg-slate-100 dark:bg-navy-950/50 rounded-lg border border-transparent focus:border-primary-500 outline-none dark:text-white text-sm"
                     />
                 </div>
                 <div>
-                     <label className="block text-sm font-black text-slate-500 mb-2 uppercase tracking-wider">Meta Description</label>
+                     <label className="block text-[10px] font-black text-slate-500 mb-1 uppercase tracking-wider">Meta Description</label>
                     <textarea 
                         value={meta.desc}
                         onChange={e => setMeta({...meta, desc: e.target.value})}
                         placeholder="Describe your page here..."
-                        className="w-full h-32 p-4 bg-slate-100 dark:bg-navy-950/50 rounded-xl border border-transparent focus:border-primary-500 outline-none dark:text-white"
+                        className="w-full h-24 p-3 bg-slate-100 dark:bg-navy-950/50 rounded-lg border border-transparent focus:border-primary-500 outline-none dark:text-white text-sm"
                     />
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                      <div>
-                        <label className="block text-sm font-black text-slate-500 mb-2 uppercase tracking-wider">Keywords</label>
+                        <label className="block text-[10px] font-black text-slate-500 mb-1 uppercase tracking-wider">Keywords</label>
                         <input 
                             type="text" 
                             value={meta.keywords}
                             onChange={e => setMeta({...meta, keywords: e.target.value})}
-                            className="w-full p-4 bg-slate-100 dark:bg-navy-950/50 rounded-xl border border-transparent focus:border-primary-500 outline-none dark:text-white"
+                            className="w-full p-3 bg-slate-100 dark:bg-navy-950/50 rounded-lg border border-transparent focus:border-primary-500 outline-none dark:text-white text-sm"
                         />
                     </div>
                     <div>
-                        <label className="block text-sm font-black text-slate-500 mb-2 uppercase tracking-wider">Author</label>
+                        <label className="block text-[10px] font-black text-slate-500 mb-1 uppercase tracking-wider">Author</label>
                         <input 
                             type="text" 
                             value={meta.author}
                             onChange={e => setMeta({...meta, author: e.target.value})}
-                            className="w-full p-4 bg-slate-100 dark:bg-navy-950/50 rounded-xl border border-transparent focus:border-primary-500 outline-none dark:text-white"
+                            className="w-full p-3 bg-slate-100 dark:bg-navy-950/50 rounded-lg border border-transparent focus:border-primary-500 outline-none dark:text-white text-sm"
                         />
                     </div>
                 </div>
                 <button 
                   onClick={generate}
-                  className="w-full py-5 bg-primary-600 text-white rounded-2xl font-black text-xl hover:bg-primary-500"
+                  className="w-full py-3 bg-primary-600 text-white rounded-xl font-black text-lg hover:bg-primary-500"
                 >
                   Generate Tags
                 </button>
@@ -173,31 +173,31 @@ const WordCounter = () => {
 
     return (
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-8">
-            <div className="glass-card p-8 rounded-3xl">
+            <div className="glass-card p-6 rounded-2xl">
                 <textarea 
                     value={text} 
                     onChange={e => setText(e.target.value)}
                     placeholder="Enter text to count..."
-                    className="w-full h-[400px] bg-slate-100 dark:bg-navy-950/50 rounded-2xl p-6 border-2 border-transparent focus:border-primary-500 outline-none dark:text-white text-lg"
+                    className="w-full h-[250px] bg-slate-100 dark:bg-navy-950/50 rounded-xl p-4 border-2 border-transparent focus:border-primary-500 outline-none dark:text-white text-base"
                 />
             </div>
             <ResultPanel title="Text Stats">
-                <div className="grid grid-cols-2 gap-4">
-                    <div className="bg-slate-50 dark:bg-white/5 p-6 rounded-2xl text-center border border-slate-200 dark:border-white/10 shadow-sm">
-                        <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Words</p>
-                        <p className="text-3xl font-black text-primary-600">{stats.words}</p>
+                <div className="grid grid-cols-2 gap-3">
+                    <div className="bg-slate-50 dark:bg-white/5 p-4 rounded-xl text-center border border-slate-200 dark:border-white/10 shadow-sm">
+                        <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">Words</p>
+                        <p className="text-2xl font-black text-primary-600">{stats.words}</p>
                     </div>
-                    <div className="bg-slate-50 dark:bg-white/5 p-6 rounded-2xl text-center border border-slate-200 dark:border-white/10 shadow-sm">
-                        <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Characters</p>
-                        <p className="text-3xl font-black text-cyan-600">{stats.chars}</p>
+                    <div className="bg-slate-50 dark:bg-white/5 p-4 rounded-xl text-center border border-slate-200 dark:border-white/10 shadow-sm">
+                        <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">Characters</p>
+                        <p className="text-2xl font-black text-cyan-600">{stats.chars}</p>
                     </div>
-                    <div className="bg-slate-50 dark:bg-white/5 p-6 rounded-2xl text-center border border-slate-200 dark:border-white/10 shadow-sm">
-                        <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Sentences</p>
-                        <p className="text-3xl font-black text-indigo-600">{stats.sentences}</p>
+                    <div className="bg-slate-50 dark:bg-white/5 p-4 rounded-xl text-center border border-slate-200 dark:border-white/10 shadow-sm">
+                        <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">Sentences</p>
+                        <p className="text-2xl font-black text-indigo-600">{stats.sentences}</p>
                     </div>
-                     <div className="bg-slate-50 dark:bg-white/5 p-6 rounded-2xl text-center border border-slate-200 dark:border-white/10 shadow-sm">
-                        <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Reading Time</p>
-                        <p className="text-3xl font-black text-amber-600">{stats.readTime}m</p>
+                     <div className="bg-slate-50 dark:bg-white/5 p-4 rounded-xl text-center border border-slate-200 dark:border-white/10 shadow-sm">
+                        <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">Reading Time</p>
+                        <p className="text-2xl font-black text-amber-600">{stats.readTime}m</p>
                     </div>
                 </div>
             </ResultPanel>
@@ -240,27 +240,27 @@ const SEOAudit = () => {
 
     return (
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_450px] gap-8">
-            <div className="glass-card p-10 rounded-3xl h-fit">
-                <h3 className="text-2xl font-black dark:text-white mb-6">Website Scanner</h3>
-                <div className="flex flex-col sm:flex-row gap-4 mb-6">
+            <div className="glass-card p-6 rounded-2xl h-fit">
+                <h3 className="text-xl font-black dark:text-white mb-4">Website Scanner</h3>
+                <div className="flex flex-col sm:flex-row gap-3 mb-4">
                     <input 
                         type="url" 
                         placeholder="https://example.com" 
                         value={url}
                         onChange={e => setUrl(e.target.value)}
-                        className="flex-grow p-4 bg-slate-100 dark:bg-navy-950/50 rounded-xl border-2 border-transparent focus:border-primary-500 outline-none dark:text-white transition-all"
+                        className="flex-grow p-3 bg-slate-100 dark:bg-navy-950/50 rounded-lg border-2 border-transparent focus:border-primary-500 outline-none dark:text-white transition-all text-sm"
                     />
                     <button 
                         onClick={audit}
                         disabled={!url || loading}
-                        className="px-8 py-4 bg-primary-600 text-white rounded-xl font-black hover:bg-primary-500 disabled:opacity-50 shrink-0 shadow-lg shadow-primary-600/20 active:scale-95 transition-all"
+                        className="px-6 py-3 bg-primary-600 text-white rounded-lg font-black hover:bg-primary-500 disabled:opacity-50 shrink-0 shadow-lg shadow-primary-600/20 active:scale-95 transition-all text-sm"
                     >
                         {loading ? 'Scanning...' : 'Scan'}
                     </button>
                 </div>
-                <div className="bg-amber-500/10 border border-amber-500/20 p-4 rounded-2xl flex items-start gap-4">
-                    <Info size={24} className="text-amber-600 flex-shrink-0 mt-1" />
-                    <p className="text-amber-800 dark:text-amber-200 text-sm leading-relaxed font-semibold">
+                <div className="bg-amber-500/10 border border-amber-500/20 p-3 rounded-xl flex items-start gap-3">
+                    <Info size={18} className="text-amber-600 flex-shrink-0 mt-0.5" />
+                    <p className="text-amber-800 dark:text-amber-200 text-[11px] leading-relaxed font-semibold">
                         This is a mock analysis. To get real-time deep crawling data, connect to our premium API in the settings panel.
                     </p>
                 </div>
@@ -301,33 +301,33 @@ const GoogleSerpPreview = () => {
 
     return (
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_450px] gap-8">
-            <div className="glass-card p-8 rounded-3xl space-y-6">
+            <div className="glass-card p-6 rounded-2xl space-y-4">
                 <div>
-                    <label className="block text-sm font-black text-slate-500 mb-2 uppercase tracking-wider">Page Title</label>
+                    <label className="block text-[10px] font-black text-slate-500 mb-1 uppercase tracking-wider">Page Title</label>
                     <input 
                         type="text" 
                         value={meta.title}
                         onChange={e => setMeta({...meta, title: e.target.value})}
                         placeholder="Smart SEO Toolkit | All-in-one SEO Workspace"
-                        className="w-full p-4 bg-slate-100 dark:bg-navy-950/50 rounded-xl border border-transparent focus:border-primary-500 outline-none dark:text-white"
+                        className="w-full p-3 bg-slate-100 dark:bg-navy-950/50 rounded-lg border border-transparent focus:border-primary-500 outline-none dark:text-white text-sm"
                     />
                 </div>
                 <div>
-                     <label className="block text-sm font-black text-slate-500 mb-2 uppercase tracking-wider">Meta Description</label>
+                     <label className="block text-[10px] font-black text-slate-500 mb-1 uppercase tracking-wider">Meta Description</label>
                     <textarea 
                         value={meta.desc}
                         onChange={e => setMeta({...meta, desc: e.target.value})}
                         placeholder="Experience the future of SEO with our premium tools..."
-                        className="w-full h-32 p-4 bg-slate-100 dark:bg-navy-950/50 rounded-xl border border-transparent focus:border-primary-500 outline-none dark:text-white"
+                        className="w-full h-24 p-3 bg-slate-100 dark:bg-navy-950/50 rounded-lg border border-transparent focus:border-primary-500 outline-none dark:text-white text-sm"
                     />
                 </div>
                 <div>
-                    <label className="block text-sm font-black text-slate-500 mb-2 uppercase tracking-wider">Site URL</label>
+                    <label className="block text-[10px] font-black text-slate-500 mb-1 uppercase tracking-wider">Site URL</label>
                     <input 
                         type="text" 
                         value={meta.url}
                         onChange={e => setMeta({...meta, url: e.target.value})}
-                        className="w-full p-4 bg-slate-100 dark:bg-navy-950/50 rounded-xl border border-transparent focus:border-primary-500 outline-none dark:text-white"
+                        className="w-full p-3 bg-slate-100 dark:bg-navy-950/50 rounded-lg border border-transparent focus:border-primary-500 outline-none dark:text-white text-sm"
                     />
                 </div>
             </div>
@@ -411,8 +411,8 @@ const ToolGuide = ({ tool, onClose }) => {
                         <Icon size={32} className="text-primary-600" />
                     </div>
                     <div>
-                        <h2 className="text-3xl font-black dark:text-white">{tool.name} Guide</h2>
-                        <p className="text-slate-400 font-bold uppercase tracking-widest text-xs">Complete walk-through of the {tool.category} toolkit</p>
+                        <h2 className="text-2xl font-black dark:text-white">{tool.name} Guide</h2>
+                        <p className="text-slate-400 font-bold uppercase tracking-widest text-[10px]">Complete walk-through of the {tool.category} toolkit</p>
                     </div>
                 </div>
 
@@ -497,27 +497,27 @@ const HealthChecker = () => {
 
     return (
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_450px] gap-8">
-            <div className="glass-card p-10 rounded-3xl h-fit">
-                <h3 className="text-2xl font-black dark:text-white mb-6">Performance Scanner</h3>
-                <div className="flex flex-col sm:flex-row gap-4 mb-6">
+            <div className="glass-card p-6 rounded-2xl h-fit">
+                <h3 className="text-xl font-black dark:text-white mb-4">Performance Scanner</h3>
+                <div className="flex flex-col sm:flex-row gap-3 mb-4">
                     <input 
                         type="url" 
                         placeholder="https://mysite.com" 
                         value={url}
                         onChange={e => setUrl(e.target.value)}
-                        className="flex-grow p-4 bg-slate-100 dark:bg-navy-950/50 rounded-xl border-2 border-transparent focus:border-primary-500 outline-none dark:text-white transition-all"
+                        className="flex-grow p-3 bg-slate-100 dark:bg-navy-950/50 rounded-lg border-2 border-transparent focus:border-primary-500 outline-none dark:text-white transition-all text-sm"
                     />
                     <button 
                         onClick={check}
                         disabled={!url || loading}
-                        className="px-8 py-4 bg-primary-600 text-white rounded-xl font-black hover:bg-primary-500 disabled:opacity-50 shrink-0 shadow-lg shadow-primary-600/20 active:scale-95 transition-all"
+                        className="px-6 py-3 bg-primary-600 text-white rounded-lg font-black hover:bg-primary-500 disabled:opacity-50 shrink-0 shadow-lg shadow-primary-600/20 active:scale-95 transition-all text-sm"
                     >
                         {loading ? 'Analyzing...' : 'Check Health'}
                     </button>
                 </div>
                 
                 {results && (
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 py-8 border-t border-slate-100 dark:border-white/5 mt-8">
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 py-6 border-t border-slate-100 dark:border-white/5 mt-4">
                         <MetricRing percentage={results.performance} label="Performance" color="text-emerald-500" />
                         <MetricRing percentage={results.accessibility} label="Accessibility" color="text-amber-500" />
                         <MetricRing percentage={results.bestPractices} label="Practices" color="text-primary-500" />
@@ -549,6 +549,77 @@ const HealthChecker = () => {
     );
 };
 
+const ToolInformation = ({ tool }) => {
+    const info = {
+        'keyword-density': {
+            how: `Our algorithm scans your entire document, stripping away common "stop words" and punctuation to identify your most frequent terms. It then calculates the percentage of each word relative to the total word count.`,
+            output: `You will receive a ranked list of keywords, their raw frequency (count), and a percentage-based density bar. Ideally, your primary keyword should be between 1-2% for natural SEO.`,
+            tips: `Avoid "keyword stuffing" by keeping density under 3%. Use synonyms (LSI keywords) to maintain relevance without repetitive phrasing.`
+        },
+        'meta-tag-generator': {
+            how: `Based on the title and description you provide, we generate the exact HTML snippets required for Google (Meta Tags) and social platforms like X and Facebook (Open Graph).`,
+            output: `A code block containing pre-formatted HTML tags. We also provide a character count to ensure your tags don't get truncated (cut off) in search results.`,
+            tips: `Keep your titles under 60 characters and descriptions under 160 characters for maximum visibility.`
+        },
+        'word-counter': {
+            how: `We process your text through a high-speed tokenization engine that counts every character, word, and sentence. We also calculate estimate "Reading Time" based on a standard speed of 200 words per minute.`,
+            output: `A statistical dashboard showing total counts and reading time. This helps you hit specific length targets for guest posts or ad copy.`,
+            tips: `For blog posts, aim for at least 1,200 words to improve your chances of appearing on Google’s first page.`
+        },
+        'basic-seo-audit': {
+            how: `Our scanner performs a technical crawl of your URL to check for essential SEO elements like SSL security, Heading tags (H1), image Alt text, and page speed headers.`,
+            output: `An overall "Health Score" out of 100, followed by a categorized list of Errors (critical), Warnings (optional), and Successes (optimized).`,
+            tips: `Always fix the Red ERRORS first, as these have the highest impact on your search engine ranking.`
+        },
+        'google-serp-preview': {
+            how: `This tool renders a pixel-perfect simulation of a Google Search Result page based on your specific metadata. It mimics font sizes, colors, and layouts to show you exactly what your site will look like.`,
+            output: `A visual preview of your snippet. Use this to ensure your most important keywords are visible and not cut off by ellipses (...).`,
+            tips: `Use an action-oriented description to improve your Click-Through Rate (CTR).`
+        },
+        'site-health-checker': {
+            how: `We use a performance engine that measures Core Web Vitals. This checks how fast your page loads (LCP), how interactive it is (FID), and how stable the layout is during loading (CLS).`,
+            output: `Four major scores: Performance, Accessibility, Best Practices, and SEO. High scores here mean a better experience for your users.`,
+            tips: `If your performance score is low, try optimizing your images and reducing large JavaScript files.`
+        }
+    }[tool.id] || { 
+        how: `This tool uses our smart SEO algorithms to analyze your input and provide actionable data point to improve your ranking.`,
+        output: `A detailed report or generated code snippet based on your specific inputs.`,
+        tips: `Regularly audits your content to stay ahead of search engine algorithm updates.`
+    };
+
+    return (
+        <div className="mt-16 border-t border-slate-200 dark:border-white/5 pt-16">
+            <h2 className="text-2xl font-black text-slate-800 dark:text-white mb-8 text-center">Toolkit Information.</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div className="glass-card p-8 rounded-3xl border-t-4 border-t-primary-500">
+                    <h4 className="text-lg font-black dark:text-white mb-4 flex items-center gap-2">
+                        <Info size={18} className="text-primary-500" /> How it works?
+                    </h4>
+                    <p className="text-slate-500 dark:text-slate-300 text-sm leading-relaxed font-medium">
+                        {info.how}
+                    </p>
+                </div>
+                <div className="glass-card p-8 rounded-3xl border-t-4 border-t-emerald-500">
+                    <h4 className="text-lg font-black dark:text-white mb-4 flex items-center gap-2">
+                        <CheckCircle2 size={18} className="text-emerald-500" /> Analysis Output
+                    </h4>
+                    <p className="text-slate-500 dark:text-slate-300 text-sm leading-relaxed font-medium">
+                        {info.output}
+                    </p>
+                </div>
+                <div className="glass-card p-8 rounded-3xl border-t-4 border-t-amber-500">
+                    <h4 className="text-lg font-black dark:text-white mb-4 flex items-center gap-2">
+                        <Star size={18} className="text-amber-500" /> Expert Tips
+                    </h4>
+                    <p className="text-slate-500 dark:text-slate-300 text-sm leading-relaxed font-medium">
+                        {info.tips}
+                    </p>
+                </div>
+            </div>
+        </div>
+    );
+};
+
 // --- MAIN WRAPPER ---
 
 const ToolDetail = () => {
@@ -572,34 +643,34 @@ const ToolDetail = () => {
 
   return (
     <div className="pt-6 min-h-screen max-w-7xl mx-auto px-4 md:px-8 pb-20">
-      <Link to="/tools" className="inline-flex items-center gap-2 font-bold text-slate-400 hover:text-primary-500 mb-8 transition-colors group">
+      <Link to="/tools" className="inline-flex items-center gap-2 font-bold text-slate-400 hover:text-primary-500 mb-6 transition-colors group">
         <ChevronLeft size={18} className="group-hover:-translate-x-1 transition-transform" /> Back to Workspace
       </Link>
 
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="mb-16 flex flex-col md:flex-row items-start justify-between gap-8"
+        className="mb-12 flex flex-col md:flex-row items-start justify-between gap-8"
       >
         <div className="max-w-3xl">
-          <div className="flex items-center gap-4 mb-4">
-            <span className="px-4 py-1 bg-primary-600/10 text-primary-600 text-xs font-black uppercase tracking-widest rounded-full">{tool.category}</span>
-            <span className="flex items-center gap-1 text-amber-500 font-bold text-sm"><Star size={14} fill="currentColor" /> 4.9 (2k+ Users)</span>
-            <span className="flex items-center gap-1 text-slate-400 font-bold text-sm"><Clock size={14} /> Instant Results</span>
+          <div className="flex items-center gap-4 mb-3">
+            <span className="px-3 py-0.5 bg-primary-600/10 text-primary-600 text-[10px] font-black uppercase tracking-widest rounded-full">{tool.category}</span>
+            <span className="flex items-center gap-1 text-amber-500 font-bold text-[10px]"><Star size={12} fill="currentColor" /> 4.9 (2k+ Users)</span>
+            <span className="flex items-center gap-1 text-slate-400 font-bold text-[10px]"><Clock size={12} /> Instant Results</span>
           </div>
-          <h1 className="text-5xl font-black text-slate-800 dark:text-white mb-6 leading-tight select-none">{tool.name}</h1>
-          <p className="text-xl text-slate-500 dark:text-slate-400 leading-relaxed font-medium">
+          <h1 className="text-2xl md:text-3xl font-black text-slate-800 dark:text-white mb-3 leading-tight select-none">{tool.name}</h1>
+          <p className="text-base text-slate-500 dark:text-slate-400 leading-relaxed font-medium">
             {tool.description}
           </p>
         </div>
 
         <div className="flex gap-4">
-            <button className="p-4 rounded-2xl bg-white dark:bg-navy-900 border border-slate-200 dark:border-white/10 hover:bg-slate-50 dark:hover:bg-white/5 transition-all shadow-sm">
-                <Share2 size={24} className="text-slate-500" />
+            <button className="p-3 rounded-xl bg-white dark:bg-navy-900 border border-slate-200 dark:border-white/10 hover:bg-slate-50 dark:hover:bg-white/5 transition-all shadow-sm">
+                <Share2 size={20} className="text-slate-500" />
             </button>
              <button 
                 onClick={() => setShowGuide(true)}
-                className="p-4 rounded-2xl bg-primary-600 text-white shadow-xl shadow-primary-600/30 hover:bg-primary-500 transition-all font-black px-8"
+                className="p-3 rounded-xl bg-primary-600 text-white shadow-lg shadow-primary-600/30 hover:bg-primary-500 transition-all font-black px-6 text-sm"
               >
                 Guide Tool
             </button>
@@ -613,6 +684,8 @@ const ToolDetail = () => {
       <div className="relative">
         {renderTool()}
       </div>
+
+      <ToolInformation tool={tool} />
     </div>
   );
 };
