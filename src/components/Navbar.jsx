@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Zap, ChevronDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { TOOLS, CATEGORIES } from '../data/tools';
 
 function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -29,15 +30,60 @@ function Navbar() {
 
           {/* Desktop Nav List */}
           <div className="hidden md:flex items-center space-x-8">
-            <Link to="/tools" className="flex items-center text-[15px] font-medium text-slate-800 dark:text-slate-200 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
-              Tools <ChevronDown className="ml-1 size-4 opacity-50" />
-            </Link>
-            <a href="#" className="flex items-center text-[15px] font-medium text-slate-800 dark:text-slate-200 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
-              Category <ChevronDown className="ml-1 size-4 opacity-50" />
-            </a>
-            <a href="#" className="flex items-center text-[15px] font-medium text-slate-800 dark:text-slate-200 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+            {/* Megamenu for Tools */}
+            <div className="relative group">
+              <Link to="/tools" className="flex items-center text-[15px] font-medium text-slate-800 dark:text-slate-200 hover:text-primary-600 dark:hover:text-primary-400 transition-colors py-4 -my-4 cursor-pointer">
+                Tools <ChevronDown className="ml-1 size-4 opacity-50 block group-hover:rotate-180 transition-transform" />
+              </Link>
+              
+              {/* Mega Menu Dropdown */}
+              <div className="absolute top-12 left-1/2 -translate-x-1/2 w-[700px] bg-white dark:bg-brand-900 border border-slate-200 dark:border-white/10 rounded-2xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 transform origin-top -translate-y-2 group-hover:translate-y-0 overflow-hidden">
+                <div className="flex p-8">
+                  <div className="grid grid-cols-3 gap-12 flex-1">
+                     {/* Column 1: Categories */}
+                     <div>
+                       <h3 className="text-[15px] font-bold text-slate-900 dark:text-white mb-6">Explore Categories</h3>
+                       <ul className="space-y-4">
+                         {CATEGORIES.filter(c => c.id !== 'all').map(cat => (
+                           <li key={cat.id}>
+                             <Link to={`/tools?category=${cat.id}`} className="text-[14px] text-slate-600 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-500 font-medium transition-colors">
+                               {cat.name}
+                             </Link>
+                           </li>
+                         ))}
+                       </ul>
+                     </div>
+                     
+                     {/* Column 2: Top Tools */}
+                     <div>
+                       <h3 className="text-[15px] font-bold text-slate-900 dark:text-white mb-6">Top Toolkit Features</h3>
+                       <ul className="space-y-4">
+                         {TOOLS.slice(0, 5).map(tool => (
+                           <li key={tool.id}>
+                             <Link to={`/tools/${tool.slug}`} className="text-[14px] text-slate-600 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-500 font-medium transition-colors">
+                               {tool.name}
+                             </Link>
+                           </li>
+                         ))}
+                       </ul>
+                     </div>
+                     
+                     {/* Column 3: About Links */}
+                     <div>
+                       <h3 className="text-[15px] font-bold text-slate-900 dark:text-white mb-6">About Toolkit</h3>
+                       <ul className="space-y-4">
+                         <li><Link to="/about" className="text-[14px] text-slate-600 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-500 font-medium transition-colors">About Us</Link></li>
+                         <li><Link to="/stats" className="text-[14px] text-slate-600 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-500 font-medium transition-colors">Stats and Facts</Link></li>
+                         <li><Link to="/contact" className="text-[14px] text-slate-600 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-500 font-medium transition-colors">Contact Us</Link></li>
+                       </ul>
+                     </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <Link to="/about" className="flex items-center text-[15px] font-medium text-slate-800 dark:text-slate-200 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
               About Us
-            </a>
+            </Link>
           </div>
         </div>
 
@@ -66,12 +112,12 @@ function Navbar() {
           <Link to="/tools" className="flex items-center justify-between font-semibold py-2 text-slate-800 dark:text-slate-200 border-b border-slate-100 dark:border-white/5" onClick={() => setIsMenuOpen(false)}>
             Tools <ChevronDown className="size-4 opacity-50" />
           </Link>
-          <a href="#" className="flex items-center justify-between font-semibold py-2 text-slate-800 dark:text-slate-200 border-b border-slate-100 dark:border-white/5">
+          <Link to="/tools" onClick={() => setIsMenuOpen(false)} className="flex items-center justify-between font-semibold py-2 text-slate-800 dark:text-slate-200 border-b border-slate-100 dark:border-white/5">
             Category <ChevronDown className="size-4 opacity-50" />
-          </a>
-          <a href="#" className="flex items-center font-semibold py-2 text-slate-800 dark:text-slate-200 border-b border-slate-100 dark:border-white/5">
+          </Link>
+          <Link to="/about" onClick={() => setIsMenuOpen(false)} className="flex items-center font-semibold py-2 text-slate-800 dark:text-slate-200 border-b border-slate-100 dark:border-white/5">
             About Us
-          </a>
+          </Link>
           <div className="pt-4 flex flex-col space-y-3">
             <Link to="/login" onClick={() => setIsMenuOpen(false)} className="w-full text-center py-3 border-2 border-slate-800 dark:border-white text-slate-800 dark:text-white rounded-full font-bold text-sm">
               Log In
