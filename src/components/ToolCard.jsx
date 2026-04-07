@@ -37,7 +37,7 @@ export default function ToolCard({ tool }) {
           <span className="size-1.5 rounded-full bg-emerald-500"></span>
           Ready to use
         </span>
-        <Link 
+        <Link
           to={`/tools/${tool.slug}`}
           className="flex items-center space-x-1 font-bold text-primary-600 dark:text-primary-400 hover:text-primary-500 group/btn transition-colors"
         >
@@ -45,7 +45,7 @@ export default function ToolCard({ tool }) {
           <ChevronRight className="size-4 group-hover/btn:translate-x-1 transition-transform" />
         </Link>
       </div>
-      
+
       {/* Glow Effect on hover */}
       <div className="absolute top-0 right-0 w-32 h-32 bg-primary-500/10 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none -mr-16 -mt-16"></div>
     </motion.div>

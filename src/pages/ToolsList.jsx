@@ -15,7 +15,7 @@ const ToolsList = () => {
     const params = new URLSearchParams(search);
     const cat = params.get('category');
     const q = params.get('search');
-    
+
     if (cat) {
       setActiveCategory(cat);
       window.scrollTo(0, 0);
@@ -29,8 +29,8 @@ const ToolsList = () => {
   const filteredTools = useMemo(() => {
     return TOOLS.filter(tool => {
       const matchCategory = activeCategory === 'all' || tool.category === activeCategory;
-      const matchSearch = tool.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                          tool.description.toLowerCase().includes(searchQuery.toLowerCase());
+      const matchSearch = tool.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        tool.description.toLowerCase().includes(searchQuery.toLowerCase());
       return matchCategory && matchSearch;
     });
   }, [activeCategory, searchQuery]);
@@ -48,11 +48,11 @@ const ToolsList = () => {
           </p>
         </div>
         <div className="relative w-full md:w-96 group">
-          <input 
-            type="text" 
+          <input
+            type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Filter tools by name or purpose..." 
+            placeholder="Filter tools by name or purpose..."
             className="w-full pl-12 pr-4 py-4 rounded-2xl bg-white dark:bg-brand-900 border border-slate-200 dark:border-white/10 focus:ring-2 focus:ring-primary-500/50 outline-none transition-all shadow-sm group-hover:shadow-md dark:text-white"
           />
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 size-5 text-slate-400 group-focus-within:text-primary-500" />
@@ -77,11 +77,10 @@ const ToolsList = () => {
                 <button
                   key={cat.id}
                   onClick={() => setActiveCategory(cat.id)}
-                  className={`flex-shrink-0 flex items-center justify-between px-5 py-3 lg:px-4 lg:py-3 rounded-xl transition-all duration-300 font-bold group whitespace-nowrap ${
-                    isActive 
-                      ? 'bg-primary-600 text-white shadow-lg shadow-primary-600/20' 
-                      : 'bg-white lg:bg-transparent dark:bg-brand-900 lg:dark:bg-transparent hover:bg-slate-200 dark:hover:bg-white/5 text-slate-500 dark:text-slate-400 border border-slate-100 lg:border-transparent dark:border-white/5'
-                  }`}
+                  className={`flex-shrink-0 flex items-center justify-between px-5 py-3 lg:px-4 lg:py-3 rounded-xl transition-all duration-300 font-bold group whitespace-nowrap ${isActive
+                    ? 'bg-primary-600 text-white shadow-lg shadow-primary-600/20'
+                    : 'bg-white lg:bg-transparent dark:bg-brand-900 lg:dark:bg-transparent hover:bg-slate-200 dark:hover:bg-white/5 text-slate-500 dark:text-slate-400 border border-slate-100 lg:border-transparent dark:border-white/5'
+                    }`}
                 >
                   <div className="flex items-center gap-3">
                     <Icon size={18} className={isActive ? 'text-white' : 'text-slate-400 group-hover:text-primary-500'} />
@@ -105,30 +104,30 @@ const ToolsList = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 min-h-[400px]">
-             <AnimatePresence mode="popLayout">
-                {filteredTools.length > 0 ? (
-                  filteredTools.map((tool) => (
-                    <ToolCard key={tool.id} tool={tool} />
-                  ))
-                ) : (
-                  <motion.div 
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    className="col-span-full flex flex-col items-center justify-center py-20 text-center glass-card rounded-3xl"
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <AnimatePresence mode="popLayout">
+              {filteredTools.length > 0 ? (
+                filteredTools.map((tool) => (
+                  <ToolCard key={tool.id} tool={tool} />
+                ))
+              ) : (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="col-span-full flex flex-col items-center justify-center py-20 text-center glass-card rounded-3xl"
+                >
+                  <Search className="size-16 text-slate-300 dark:text-white/10 mb-4" />
+                  <h3 className="text-xl font-black text-slate-800 dark:text-white">No tools found matching your search.</h3>
+                  <p className="text-slate-500 dark:text-slate-400 mt-2 font-medium">Try searching for a different keyword or category.</p>
+                  <button
+                    onClick={() => { setSearchQuery(''); setActiveCategory('all'); }}
+                    className="mt-6 font-bold text-primary-500 hover:underline"
                   >
-                    <Search className="size-16 text-slate-300 dark:text-white/10 mb-4" />
-                    <h3 className="text-xl font-black text-slate-800 dark:text-white">No tools found matching your search.</h3>
-                    <p className="text-slate-500 dark:text-slate-400 mt-2 font-medium">Try searching for a different keyword or category.</p>
-                    <button 
-                      onClick={() => {setSearchQuery(''); setActiveCategory('all');}}
-                      className="mt-6 font-bold text-primary-500 hover:underline"
-                    >
-                      Clear all filters
-                    </button>
-                  </motion.div>
-                )}
-             </AnimatePresence>
+                    Clear all filters
+                  </button>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </main>
       </div>
