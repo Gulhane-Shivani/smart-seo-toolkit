@@ -43,13 +43,13 @@ function Navbar() {
 
         {/* Right Section: Actions */}
         <div className="hidden md:flex items-center space-x-4">
-          <button className="px-5 py-2 border-2 border-slate-800 dark:border-white text-slate-800 dark:text-white rounded-full font-bold hover:bg-slate-50 dark:hover:bg-white/5 transition-all text-sm">
+          <Link to="/login" className="px-5 py-2 border-2 border-slate-800 dark:border-white text-slate-800 dark:text-white rounded-full font-bold hover:bg-slate-50 dark:hover:bg-white/5 transition-all text-sm">
             Log In
-          </button>
+          </Link>
           
-          <button className="px-6 py-2.5 bg-primary-600 text-white rounded-full font-bold hover:bg-primary-500 transition-all text-sm shadow-sm group">
+          <Link to="/signup" className="px-6 py-2.5 bg-primary-600 text-white rounded-full font-bold hover:bg-primary-500 transition-all text-sm shadow-sm group">
             Sign Up
-          </button>
+          </Link>
         </div>
 
         {/* Mobile Nav Toggle */}
@@ -73,12 +73,12 @@ function Navbar() {
             About Us
           </a>
           <div className="pt-4 flex flex-col space-y-3">
-            <button className="w-full py-3 border-2 border-slate-800 dark:border-white text-slate-800 dark:text-white rounded-full font-bold text-sm">
+            <Link to="/login" onClick={() => setIsMenuOpen(false)} className="w-full text-center py-3 border-2 border-slate-800 dark:border-white text-slate-800 dark:text-white rounded-full font-bold text-sm">
               Log In
-            </button>
-            <button className="w-full py-3 bg-primary-600 text-white rounded-full font-bold text-sm">
+            </Link>
+            <Link to="/signup" onClick={() => setIsMenuOpen(false)} className="w-full text-center py-3 bg-primary-600 text-white rounded-full font-bold text-sm">
               Sign Up
-            </button>
+            </Link>
           </div>
         </div>
       )}

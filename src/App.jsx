@@ -5,6 +5,8 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import ToolsList from './pages/ToolsList';
 import ToolDetail from './pages/ToolDetail';
+import Login from './pages/Login';
+import SignUp from './pages/SignUp';
 
 // Scroll to top on route change
 const ScrollToTop = () => {
@@ -27,6 +29,8 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/tools" element={<ToolsList />} />
             <Route path="/tools/:slug" element={<ToolDetail />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<SignUp />} />
           </Routes>
         </main>
         <Footer />
