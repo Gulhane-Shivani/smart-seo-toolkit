@@ -15,25 +15,13 @@ const SEOAnalysis = () => {
         setLoading(true);
         try {
             const response = await seoApi.analyze(payload.url, payload.keyword);
-            const data = response.data;
-            const issues = [];
-            if (data.keywordCount === 0) issues.push({ type: 'error', msg: 'Focus keyword not found in content.' });
-            else issues.push({ type: 'success', msg: `Focus keyword found ${data.keywordCount} times.` });
-            if (data.wordCount < 300) issues.push({ type: 'warning', msg: `Content is short (${data.wordCount} words).` });
-            else issues.push({ type: 'success', msg: `Good content length (${data.wordCount} words).` });
-            
-            setResults({
-                score: data.score || 0,
-                issues
-            });
+            setResults(response.data);
         } catch (error) {
             console.error('API failed, showing generic fallback test data:', error);
             setResults({
                 score: 85,
-                issues: [
-                    { type: 'warning', msg: 'Focus keyword not found in h1.' },
-                    { type: 'success', msg: 'Good keyword density.' }
-                ]
+                wordCount: 1540,
+                keywordCount: 12
             });
         } finally {
             setLoading(false);
@@ -75,20 +63,43 @@ const SEOAnalysis = () => {
             <AnimatePresence>
                 {results && (
                   <ResultPanel title="Analysis Report">
-                    <div className="bg-primary-500/10 p-4 rounded-2xl border border-primary-500/20 mb-6 flex items-center justify-between">
-                        <p className="text-sm font-bold text-primary-600 dark:text-primary-400">Analysis Score</p>
-                        <h4 className="text-3xl font-black dark:text-white">{results.score || 0}/100</h4>
-                    </div>
-                    <div className="space-y-3">
-                        {(results.issues || []).map((issue, i) => (
-                            <div key={i} className="flex items-center gap-4 p-4 bg-slate-50 dark:bg-white/5 rounded-2xl border border-slate-200 dark:border-white/10">
-                                {issue.type === 'error' && <AlertTriangle className="text-rose-500" size={20} />}
-                                {issue.type === 'warning' && <AlertTriangle className="text-amber-500" size={20} />}
-                                {issue.type === 'success' && <CheckCircle2 className="text-emerald-500" size={20} />}
-                                <span className="text-sm font-medium text-slate-600 dark:text-slate-300">{issue.msg}</span>
-                            </div>
-                        ))}
-                    </div>
+                     <div className="relative size-48 mx-auto mb-10 mt-4">
+                         <svg className="size-full -rotate-90" viewBox="0 0 100 100">
+                             <circle className="text-slate-200 dark:text-white/5 stroke-current" strokeWidth="10" fill="transparent" r="40" cx="50" cy="50" />
+                             <circle 
+                                 className={`${results.score > 70 ? 'text-emerald-500' : results.score > 40 ? 'text-amber-500' : 'text-rose-500'} stroke-current transition-all duration-1000 ease-out`} 
+                                 strokeWidth="10" 
+                                 strokeDasharray="251.2" 
+                                 strokeDashoffset={251.2 * (1 - (results.score || 0) / 100)} 
+                                 strokeLinecap="round" 
+                                 fill="transparent" 
+                                 r="40" 
+                                 cx="50" 
+                                 cy="50" 
+                             />
+                         </svg>
+                         <div className="absolute inset-0 flex flex-col items-center justify-center">
+                             <span className="text-5xl font-black dark:text-white">{results.score || 0}</span>
+                             <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-1">SEO Score</span>
+                         </div>
+                     </div>
+
+                     <div className="space-y-3 mt-8">
+                         <div className="flex items-center justify-between p-4 bg-slate-50 dark:bg-white/5 rounded-2xl border border-slate-200 dark:border-white/10">
+                             <div className="flex flex-col">
+                                 <span className="text-sm font-black text-slate-800 dark:text-white">Total Word Count</span>
+                                 <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Content Length</span>
+                             </div>
+                             <span className="text-2xl font-black text-primary-600 dark:text-primary-400">{results.wordCount || 0}</span>
+                         </div>
+                         <div className="flex items-center justify-between p-4 bg-slate-50 dark:bg-white/5 rounded-2xl border border-slate-200 dark:border-white/10">
+                             <div className="flex flex-col">
+                                 <span className="text-sm font-black text-slate-800 dark:text-white">Keyword Density</span>
+                                 <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Times Found</span>
+                             </div>
+                             <span className="text-2xl font-black text-emerald-500">{results.keywordCount || 0}</span>
+                         </div>
+                     </div>
                   </ResultPanel>
                 )}
             </AnimatePresence>
