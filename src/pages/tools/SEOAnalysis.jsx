@@ -15,7 +15,17 @@ const SEOAnalysis = () => {
         setLoading(true);
         try {
             const response = await seoApi.analyze(payload.url, payload.keyword);
-            setResults(response.data);
+            const data = response.data;
+            const issues = [];
+            if (data.keywordCount === 0) issues.push({ type: 'error', msg: 'Focus keyword not found in content.' });
+            else issues.push({ type: 'success', msg: `Focus keyword found ${data.keywordCount} times.` });
+            if (data.wordCount < 300) issues.push({ type: 'warning', msg: `Content is short (${data.wordCount} words).` });
+            else issues.push({ type: 'success', msg: `Good content length (${data.wordCount} words).` });
+            
+            setResults({
+                score: data.score || 0,
+                issues
+            });
         } catch (error) {
             console.error('API failed, showing generic fallback test data:', error);
             setResults({

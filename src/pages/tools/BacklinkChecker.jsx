@@ -39,12 +39,13 @@ const BacklinkChecker = () => {
             {results && (
                 <ResultPanel title="Backlink Data">
                     <div className="space-y-4">
-                        {results.links && results.links.map((link, i) => (
-                            <div key={i} className="p-3 bg-slate-50 dark:bg-white/5 rounded-xl text-xs flex justify-between">
-                                <span className="text-primary-500 font-bold truncate max-w-[200px]">{link.source}</span>
-                                <span className="text-slate-400">DR: {link.dr}</span>
-                            </div>
-                        ))}
+                        <div className="p-4 bg-slate-50 dark:bg-white/5 rounded-2xl flex flex-col items-center justify-center border border-slate-200 dark:border-white/10">
+                            <span className="text-4xl font-black text-primary-600 mb-2">{results.backlinks !== undefined ? results.backlinks : 0}</span>
+                            <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">Total Backlinks</span>
+                        </div>
+                        <div className="p-3 bg-primary-500/10 rounded-xl text-center break-words">
+                            <span className="text-xs font-semibold text-primary-600 truncate block">Target: {results.url || url}</span>
+                        </div>
                     </div>
                 </ResultPanel>
             )}

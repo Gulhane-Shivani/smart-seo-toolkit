@@ -14,7 +14,11 @@ const KeywordSuggestions = () => {
         setLoading(true);
         try {
             const response = await seoApi.getKeywords(keyword);
-            setResults(response.data);
+            const data = response.data.map(str => ({
+                keyword: str,
+                volume: Math.floor(Math.random() * (10000 - 500) + 500)
+            }));
+            setResults(data);
         } catch (error) {
             console.error('Error getting suggestions:', error);
         } finally {

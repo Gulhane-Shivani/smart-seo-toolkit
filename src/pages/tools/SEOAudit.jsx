@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Info, AlertTriangle, CheckCircle2, X, Star } from 'lucide-react';
+import { Info, AlertTriangle, CheckCircle2, X } from 'lucide-react';
 import ResultPanel from '../../components/ResultPanel';
 import { seoApi } from '../../api/seoApi';
 
@@ -17,7 +17,19 @@ const SEOAudit = () => {
         setLoading(true);
         try {
             const response = await seoApi.audit(url);
-            setResults(response.data);
+            const data = response.data;
+            const issues = [];
+            let score = 100;
+            if (!data.title) { issues.push({ type: 'error', msg: 'Missing title tag.' }); score -= 30; }
+            else issues.push({ type: 'success', msg: `Title: ${data.title}` });
+            
+            if (!data.description) { issues.push({ type: 'warning', msg: 'Missing meta description.' }); score -= 20; }
+            else issues.push({ type: 'success', msg: `Description: ${data.description}` });
+            
+            setResults({
+                score: Math.max(score, 0),
+                issues
+            });
         } catch (error) {
             console.error('Error auditing site:', error);
             // Fallback for demo if backend is not responding with valid data structure
@@ -74,15 +86,15 @@ const SEOAudit = () => {
                     <div className="relative size-48 mx-auto mb-10">
                         <svg className="size-full" viewBox="0 0 100 100">
                           <circle className="text-slate-200 dark:text-white/5 stroke-current" strokeWidth="10" fill="transparent" r="40" cx="50" cy="50" />
-                          <circle className="text-emerald-500 stroke-current transition-all duration-1000 ease-out" strokeWidth="10" strokeDasharray="251.2" strokeDashoffset={251.2 * (1 - results.score / 100)} strokeLinecap="round" fill="transparent" r="40" cx="50" cy="50" />
+                          <circle className="text-emerald-500 stroke-current transition-all duration-1000 ease-out" strokeWidth="10" strokeDasharray="251.2" strokeDashoffset={251.2 * (1 - (results.score || 0) / 100)} strokeLinecap="round" fill="transparent" r="40" cx="50" cy="50" />
                         </svg>
                         <div className="absolute inset-0 flex flex-col items-center justify-center">
-                            <span className="text-5xl font-black dark:text-white">{results.score}</span>
+                            <span className="text-5xl font-black dark:text-white">{results.score || 0}</span>
                             <span className="text-xs font-bold text-slate-400 tracking-widest uppercase">Health</span>
                         </div>
                     </div>
                     <div className="space-y-3">
-                        {results.issues.map((issue, i) => (
+                        {results.issues && results.issues.map((issue, i) => (
                             <div key={i} className="flex items-center gap-4 p-4 bg-slate-50 dark:bg-white/5 rounded-2xl border border-slate-200 dark:border-white/10">
                                 {issue.type === 'error' && <AlertTriangle className="text-rose-500" size={20} />}
                                 {issue.type === 'warning' && <AlertTriangle className="text-amber-500" size={20} />}
