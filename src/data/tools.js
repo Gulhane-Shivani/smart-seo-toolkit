@@ -32,6 +32,15 @@ export const TOOLS = [
     slug: 'keyword-density-checker'
   },
   {
+    id: 'seo-analysis',
+    name: 'Advanced SEO Analysis',
+    category: 'analysis',
+    icon: BarChart2,
+    description: 'Deep dive into your page content for specific keyword optimization and technical metrics.',
+    popular: false,
+    slug: 'seo-analysis'
+  },
+  {
     id: 'meta-tag-generator',
     name: 'Meta Tag Generator',
     category: 'content',
@@ -75,5 +84,32 @@ export const TOOLS = [
     description: 'Analyze page load speed, mobile responsiveness, and core web vitals.',
     popular: false,
     slug: 'site-health-checker'
+  },
+  {
+    id: 'keyword-suggestions',
+    name: 'Keyword Suggestions',
+    category: 'keywords',
+    icon: Search,
+    description: 'Get related keyword ideas and search volume insights for your target topics.',
+    popular: false,
+    slug: 'keyword-suggestions'
+  },
+  {
+    id: 'backlink-checker',
+    name: 'Backlink Checker',
+    category: 'analysis',
+    icon: Globe,
+    description: 'Track and analyze incoming links to your website to improve authority.',
+    popular: false,
+    slug: 'backlink-checker'
+  },
+  {
+    id: 'sitemap-generator',
+    name: 'Sitemap Generator',
+    category: 'content',
+    icon: FileText,
+    description: 'Automatically generate XML sitemaps to help search engines index your site.',
+    popular: false,
+    slug: 'sitemap-generator'
   }
 ];
